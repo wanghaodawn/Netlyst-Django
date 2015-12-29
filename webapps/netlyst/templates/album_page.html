@@ -1,0 +1,243 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+<title> Album - Netlyst </title>
+
+<style>
+  html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+  }
+  #map {
+    width: 600px;
+    height: 300px;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 50px;
+    margin-bottom: 0px;
+    border:1px solid #E0E0E0;
+  }
+</style>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCdgarKz8i6GBpd6x_9aiTRY-uUSiWREHM&signed_in=false"></script>
+<script>
+// In the following example, markers appear when the user clicks on the map.
+// Each marker is labeled with a single alphabetical character.
+var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+var labelIndex = 0;
+
+function initialize() {
+  var user_position = { lat: {{curr_user_lat}}, lng: {{curr_user_lng}} };
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 12,
+    center: user_position
+  });
+
+  // This event listener calls addMarker() when the map is clicked.
+  google.maps.event.addListener(map, 'click', function(event) {
+    addMarker(event.latLng, map);
+  });
+
+  // Add a marker at the center of the map.
+  addMarker(user_position, map);
+}
+
+// Adds a marker to the map.
+function addMarker(location, map) {
+  // Add the marker at the clicked location, and add the next-available label
+  // from the array of alphabetical characters.
+  var marker = new google.maps.Marker({
+    position: location,
+    label: labels[labelIndex++ % labels.length],
+    map: map
+  });
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+
+{% endblock %}
+
+{% block content %}
+<script src="../static/js/jquery-2.1.4.min.js" type="text/javascript"></script>
+{% load static from staticfiles %}
+<script src="{% static 'js/qrcode.js' %}" type="text/javascript"></script>
+
+<input type="hidden" id="curr_user_lat" value={{curr_user_lat}}></input>
+<input type="hidden" id="curr_user_lng" value={{curr_user_lat}}></input>
+
+
+<table>
+  <tr>
+    <td class="navbar">
+      {% load static from staticfiles %}
+      <a href="{% url 'global' %}"><img src="{% static 'images/logo1_blue.png' %}" class="navbar_logo"></a>
+    </td>
+
+    <td class="navbar">
+      <form class="form-search">
+        <input type="text" class="round_corner_search" placeholder="Search"></input>
+      </form>
+    </td>
+
+    <td class="navbar">
+      <p class="navbar_username">
+        <a href="{% url 'django.contrib.auth.views.logout_then_login' %}" type = "submit">Log Out</a>
+      </p>
+    </td>
+
+  </tr>
+</table>
+
+
+<div class="background_lightgrey">
+  <hr>
+
+  <br /><br /><br />
+
+  <table>
+    <tr>
+      <td class="profile_layer1_left">
+        <img src="{% url 'photo' current_user.id %}" class="img-circle" alt="{{form.first_name.value}} {{form.last_name.value}}" width="130px" height="130px">
+
+      </td>
+      <td class="profile_layer1_right">
+
+        <table>
+          <tr>
+            <td>
+              <p class="big_username">
+                {{current_user.username}} 
+              </p>
+            </td>
+            {% if login_user.id = current_user.id %}
+            <td>
+              <a href="{% url 'edit' %}" class="edit_button">
+                <button type="submit" class="edit_profile_button">
+                  EDIT PROFILE
+                </button>
+              </a>
+            </td>
+            {% else %}
+            <td>
+              {% if is_following == False %}
+                  <form method="post" action="{% url 'unfollow' current_user.id %}">
+                    <button type="submit" class="edit_profile_button">
+                      FOLLOW
+                    </button>
+                    {% csrf_token %}
+                  </form>
+                {% else %}
+                  <form method="post" action="{% url 'follow' current_user.id %}">
+                    <button type="submit" class="edit_profile_button">
+                      UNFOLLOW
+                    </button>
+                    {% csrf_token %}
+                  </form>
+                {% endif %}
+              </td>
+            {% endif %}
+            <td>
+              &nbsp;&nbsp;&nbsp;&nbsp;<a href = "{% url 'album' current_user.id %}" style="font-size: 25px; text-decoration: none"> Albums </a> 
+            </td>
+          </tr>
+
+        </table>
+
+
+
+        <p class="profile_info">
+          {{postnum}} posts
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          {{f_er_num}}
+          <a href="{% url 'follow_page' current_user.id %}"> followers </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          {{f_ee_num}}
+          <a href="{% url 'follow_page' current_user.id %}"> followings </a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          0 
+          <a href="{% url 'groupstream' %}">groups</a>
+          &nbsp;&nbsp;&nbsp;&nbsp;
+          0
+          <a href="{% url 'visitorinfo' current_user.id %}"> visitors</a>
+
+         {% if login_user.id = current_user.id %}
+            <a href="{% url 'messages_inbox'%}"> INBOX </a>
+            {% load inbox %}
+            {% inbox_count %}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'messages_outbox' %}"> OUTBOX </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'messages_compose' %}"> COMPOSE </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="{% url 'messages_trash' %}"> TRASH </a>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+         {% else %}
+            <a href="{% url 'report_spam' current_user.id %}"> Report Spam </a>
+         {% endif %}
+
+        </p>
+      </table>
+
+      <table class="table_items">
+        {% for post in posts %}
+          {% if post.picture %}
+          <tr>
+            <td class="td_items">
+              <a href="{% url 'viewprofile' post.user.id %}" name = "user">{{post.user.username}}</a>
+              {{post.date|date:"F j, g:i a"}}
+            </td>
+          </tr>
+          <tr>
+            <td class="td_items">
+              <img src = "{% url 'postphoto' post.id %}" width="600px" height="600px">
+            </td>
+          </tr><br><br><br><br>
+          {% endif %}
+        {% endfor %}
+      </table>
+      
+
+<center><div id="qrcode"> </div>
+<p id="ad">
+</p>
+</center>
+<br><br>
+<center><button id="send" class="edit_profile_button">Generate QR Code</button></center>
+<script>
+    window.onload =function(){
+        var qrcode = new QRCode(document.getElementById("qrcode"), {
+            width : 96,
+            height : 96
+        });
+        var cur_url = window.location.href;
+        //qrcode.makeCode("www.baidu.com");
+        document.getElementById("send").onclick =function(){
+            //qrcode.makeCode(document.getElementById("getval").value);
+            qrcode.makeCode(cur_url);
+            document.getElementById('ad').innerHTML = "Scane the QR code and share the page with your friends!"
+        }
+    }
+
+
+</script>
+      <p class="bottom_small_blue">
+       <a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+       <a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+       <a href="#">LANGUAGE</a>
+       <p class="bottom_small_black_right">© 2015 NETLYST</p>
+     </p>
+     <br />
+   </div>
+
+   {% endblock %}

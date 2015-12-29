@@ -1,0 +1,26 @@
+{
+	"nodes": [
+		{% for group in groups %}		
+			{% if not forloop.last %}				
+				{% for member in group.members.all %}
+					{%spaceless%}
+						{% include 'node_all.json'%}
+					{%endspaceless%}
+					,
+				{% endfor %}
+			{% else %}
+				{% for member in group.members.all %}
+					{%spaceless%}
+						{% include 'node_all.json'%}
+					{%endspaceless%}
+					{% if not forloop.last %}
+						,
+					{% endif %}
+			{% endfor %}
+
+			{% endif %}
+		{% endfor %}
+	],
+	"links": [
+	]
+}

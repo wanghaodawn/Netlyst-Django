@@ -1,0 +1,4 @@
+{
+	"name": {{member.id}},
+	"group":{{group_id}}
+}

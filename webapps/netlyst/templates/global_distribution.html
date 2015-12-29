@@ -1,0 +1,99 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+<title> Global Distribution </title>
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.arc text {
+  font: 10px sans-serif;
+  text-anchor: middle;
+}
+
+.arc path {
+  stroke: #fff;
+}
+
+
+</style>
+
+<table>
+  <tr>
+    <td class="navbar">
+      <a href="{% url 'global' %}">
+        {% load static from staticfiles %}
+        <img src="{% static 'images/logo1_blue.png' %}" class="navbar_logo">
+      </a>
+    </td>
+
+    <td class="navbar">
+      <form method="post" action="{% url 'searchUser' %}" class="form-search">
+        <input type="text" class="round_corner_search" name="search" placeholder="Search"></input>
+        {% csrf_token %}
+      </form>
+    </td>
+
+    <td class="navbar">
+      <p class="navbar_username">
+        <a href="{% url 'profile' %}">{{current_user}}</a>
+      </p>
+    </td>
+
+  </tr>
+</table>
+
+
+<div class="background_lightgrey">
+  <hr>
+
+    <br /><br /><br />
+    <br /><br /><br /><br /><br /><br />
+    <table>
+      <tr>
+        <td></td>
+        <td>
+          <a href="{% url 'age_distribution' %}">
+            {% load static from staticfiles %}
+            <img src="{% static 'images/age.png' %}" class="navbar_logo">
+          </a>
+        </td>
+        <td>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        </td>
+        <td>
+          <a href="{% url 'gender_distribution' %}">
+            {% load static from staticfiles %}
+            <img src="{% static 'images/gender.png' %}" class="navbar_logo">
+          </a>
+        </td>
+        <td></td>
+      </tr>
+    </table>
+
+    <br /><br /><br /><br /><br />
+    <br /><br /><br /><br /><br /><br /><br />
+    <p class="bottom_small_blue">
+      <a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+      <a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">LANGUAGE</a>
+      <p class="bottom_small_black_right">© 2015 NETLYST</p>
+    </p>
+    <br />
+  </div>
+
+  {% endblock %}
+
+

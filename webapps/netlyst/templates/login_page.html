@@ -1,0 +1,87 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+	<title> Login Netlyst Now! </title>
+{% endblock %}
+
+{% block content %}
+				{% load static from staticfiles %}
+				<img src="{% static 'images/city.jpg' %}" class="img_signup_background" alt="" />
+
+				<div class="container-fluid">
+				<div class="col-md-3">
+					<br /><br />
+				</div>
+				<div class="col-md-6" id="middlebar">
+					<br />
+
+					<form class="login_form" method="post" action="login">
+							<p class="signup_page_middle_big_sentense">Netlyst</p>
+							<br />
+							<label for="inputUsername" class="sr-only" maxlength="20">Username</label>
+								<input type="text" id="inputUsername" name="username" class="form-control" placeholder="Username" required autofocus>
+								<br />
+							<label for="inputPassword" class="sr-only" maxlength="20">Password</label>
+							<input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password">
+
+							<!-- <table>
+			          <tr>
+			          	<td><input for="id_username" class="sr-only" style = "color:white" value = "">Username:</input></td>
+			          	<td>{{ form.username }}</td>
+			          </tr>
+			          <br />
+			          <tr>
+			          	<td><input for="id_password" class="sr-only" style = "color:white" value = "">Password</input></td>
+			          	<td>{{ form.password }}</td>
+			          </tr>
+		          </table> -->
+								<div class="checkbox">
+								<label>
+								<input type="checkbox" value="remember-me"> Remember me
+								</label>
+							</div>
+							<a href="{% url 'confirmmessage' %}" name = "user">Forget your password?</a>
+
+								{% for error in errors %}
+									<p style="color: red">
+										{{ error }}
+									</p>
+								{% endfor %}
+								<br />
+								<input type="submit" class="btn btn-lg btn-primary btn-block" value="Login"/> 
+								<input type="button" onclick="location.href='signup'" class="btn btn-lg btn-defalut btn-block" value="Sign up"/>
+								
+								{% csrf_token %}
+					</form>
+				</div>
+
+				<div class="col-md-3">
+				</div>
+			</div>
+
+			<div class="signup_page_container_bottom">
+					<br />
+					<p class="p_center">
+						{% load static from staticfiles %}
+						<a href="#"><img src="{% static 'images/download-on-apple-store.png' %}" class="imgdownload" alt=""/></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						{% load static from staticfiles %}
+						<a href="#"><img src="{% static 'images/download-on-google-play.png' %}" class="imgdownload" alt=""/></a>
+					</p>
+					<br /><br />
+					<p class="bottom_small_blue">
+						<a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+						<a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">LANGUAGE</a>
+						<p class="bottom_small_black_right">© 2015 NETLYST</p>
+					</p>
+					<br />
+			</div>
+		
+{% endblock %}

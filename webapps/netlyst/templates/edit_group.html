@@ -1,0 +1,92 @@
+{% extends "home_page.html" %}
+
+{% block title %} 
+	<title> Edit Profile - Netlyst </title>
+
+	<style>
+      html, body {
+        height: 100%;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+      }
+      #map {
+        height: 300px;
+        width: 600px;
+        margin-left: 0px;
+        margin-right: 0px;
+        margin-top: 50px;
+        margin-bottom: 80px;
+        border:1px solid #E0E0E0;
+      }
+   </style>
+
+{% endblock %}
+
+{% block content %} 
+{% load static from staticfiles %}
+<script src="{ % static 'js/jquery-2.1.4.min.js' %}" type="text/javascript"></script>
+
+<table>
+  <tr>
+    <td class="navbar">
+      {% load static from staticfiles %}
+      <a href="{% url 'global' %}"><img src="{% static 'images/logo1_blue.png' %}" class="navbar_logo"></a>
+    </td>
+
+    <td class="navbar">
+      <form class="form-search">
+        <input type="text" class="round_corner_search" placeholder="Search"></input>
+      </form>
+    </td>
+
+    <td class="navbar">
+      <p class="navbar_username">
+        <a href="{% url 'django.contrib.auth.views.logout_then_login' %}" type = "submit">Log Out</a>
+      </p>
+    </td>
+  </tr>
+</table>
+
+
+
+<hr>
+<br /><br />
+ {% if form.picture.value %}
+ 	<table>
+ 		<tr><td>
+ 			<td>
+    	<img src = "{% url 'groupphoto' group.id %}" height="300px" width="400px">
+    	<td>
+  	</tr>
+  </table>
+  <br /><br />
+ {% endif %} 
+
+
+<form enctype="multipart/form-data" method = "post" action = "{% url 'edit_group' group.id %}" >
+	<table>
+    {{form}}
+   </table>
+  <input type="submit" value="Save Group info">
+  {% csrf_token %}
+</form>
+
+
+    <p class="bottom_small_blue">
+     <a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+     <a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+     <a href="#">LANGUAGE</a>
+     <p class="bottom_small_black_right">© 2015 NETLYST</p>
+   </p>
+   <br />
+ </div>
+
+
+{% endblock %}

@@ -1,0 +1,493 @@
+
+/* Home Page */
+p.p_center {
+  color:white;
+  text-align:center;
+  font-family:Arial;
+  font-size:20px;
+}
+
+/*.container {
+  width:100%;
+  background:#005687;
+  min-width:100%;
+  color:#ffffff;
+  text-align:center;
+  font-family:Arial;
+  font-size:10px;
+}*/
+
+.container_bottom {
+  background:white;
+}
+
+img.imgtitle {
+  height:15%;
+  width:15%;
+  margin-left:0px;
+  margin-right:0px;
+  margin-top:0px;
+  margin-bottom:0px;
+}
+
+table {
+  margin:auto;
+}
+
+img.img_login_background {
+  width:100%;
+  height:100%;
+  /*opacity:0.9;*/
+  max-height:550px;
+  z-index:-1;
+}
+
+img.imglogo {
+  width:60%;
+  height:60%; 
+}
+
+img.imgdownload {
+  width:15%;
+  height:15%;
+  margin-top:20%;
+}
+
+p.bottom_small_blue {
+  font-size:12px;
+  font-family:Arial;
+  color:#B3E5FC;
+  text-align:left;
+  margin-left:10%;
+  /*font-weight:bold;*/
+}
+
+p.bottom_small_black_right {
+  font-size:12px;
+  font-family:Arial;
+  color:black;
+  text-align:right;
+  margin-right:10%;
+  /*font-weight:bold;*/
+  margin-top:-27px;
+}
+
+p.login_page_middle_big_sentense {
+  font-size:30px;
+  font-family:Arial;
+  color:white;
+  text-align:center;
+  /*font-weight:bold;*/
+  margin-top:-33%;
+  z-index:1;
+}
+
+button.login_button {
+  font-family:Arial;
+  color:white;
+  font-size:15px;
+  background:transparent;
+  padding: 10px 32px 10px 32px;
+  border: solid white 2px;
+  margin-top:60%;
+}
+
+button.signup_button {
+  font-family:Arial;
+  color:white;
+  font-size:15px;
+  background:transparent;
+  padding: 10px 25px 10px 25px;
+  border: solid white 2px;
+  margin-top:60%;
+}
+
+p.center {
+  text-align:center;
+}
+
+
+
+
+/* Signup Page */
+.slight_grey_background {
+  background-color:#F8F8F8;
+}
+
+form.signup_form {
+  margin-top:-490px;
+  border: solid #ffffff 2px;
+  padding: 30px;
+  background-color: white;
+  opacity:0.9;
+}
+
+h1.h1_center {
+  text-align: center;
+}
+
+p.signup_page_middle_big_sentense {
+  font-size:30px;
+  font-family:Arial;
+  color: #1565C0;
+  text-align:center;
+  /*font-weight:bold;*/
+  z-index:1;
+  opacity:0.75;
+}
+
+img.img_signup_background {
+  width:100%;
+  height:100%;
+  /*opacity:0.9;*/
+  max-height:550px;
+  z-index:-1;
+}
+
+.signup_page_container_bottom {
+  background:white;
+  margin-top:-20%;
+}
+
+
+
+
+/* Login Page */
+form.login_form {
+  margin-top:-470px;
+  border: solid #ffffff 2px;
+  padding: 30px;
+  background-color: white;
+  opacity:0.9;
+}
+
+
+
+
+/* Profile page */
+.profile_page_container_bottom {
+  background:white;
+  margin-top:5%;
+}
+
+input.round_corner_search {
+  margin-top:20px;
+  border:1px solid #E0E0E0;
+  border-radius:20px;
+  text-align:center;
+  background-color:#FAFAFA;
+}
+
+p.navbar_username {
+  font-family:Arial;
+  color:#B3E5FC;
+  font-size:15px;
+  text-align:center;
+  margin-top:34px;
+  font-weight:bold;
+}
+
+.background_lightgrey {
+  background-color:#FAFAFA;
+  padding-left:30px;
+  padding-bottom:30px;
+}
+
+table.table_items {
+  background-color:white;
+  border:1px solid #E0E0E0;
+  padding:0px;
+  margin-top:50px;
+  margin-bottom:50px;
+  width:600px;
+}
+
+td.items {
+  margin-top:0px;
+  margin-bottom:0px;
+  padding-top:0px;
+  width:600px;
+  border:0px;
+}
+
+td.navbar {
+  width: 300px;
+  text-align: center;
+}
+
+
+
+
+
+/* Global Page */
+img.avatar {
+  width:150px;
+}
+
+td.profile_layer1_left {
+  width:130px;
+  text-align:center;
+}
+
+td.profile_layer1_right {
+  width:500px;
+  text-align:left;
+}
+
+p.big_username {
+  margin-top:0px;
+  font-family: Arial;
+  font-size: 30px;
+  color: #6F6F70;
+  text-align:left;
+}
+
+button.edit_profile_button {
+  font-family:Arial;
+  color:#A6A7A8;
+  font-size:12px;
+  background:transparent;
+  padding: 8px 13px 8px 13px;
+  border: solid #A6A7A8 2px;
+  margin-top:-15px;
+  margin-left: 30px;
+}
+
+button.like_button {
+  font-family:Arial;
+  color:#A6A7A8;
+  font-size:12px;
+  background:transparent;
+  padding: 8px 13px 8px 13px;
+  border: solid #A6A7A8 2px;
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+table.profile_layer1_right {
+  margin-top:-100px;
+}
+
+p.big_name {
+  margin-top:10px;
+  font-family: Arial;
+  font-size: 17px;
+  color: #6F6F70;
+  text-align:left;
+  margin-left: 0px;
+}
+
+p.profile_info {
+  margin-top:10px;
+  font-family: Arial;
+  font-size: 14px;
+  color: #6F6F70;
+  margin-left: 72px;
+}
+
+p.left {
+  text-align: left;
+}
+
+img.navbar_logo {
+  width:100px;
+  margin-top:20px;
+}
+
+table.table_items_send_post {
+  background-color:white;
+  border:1px solid #E0E0E0;
+  margin-top:48px;
+  margin-bottom:50px;
+  width:600px;
+}
+
+textarea.textarea_post {
+  border:1px solid #E0E0E0;
+  margin-top: 23px;
+}
+
+button.post_button {
+  font-family:Arial;
+  color:#A6A7A8;
+  font-size:12px;
+  background:transparent;
+  padding: 8px 13px 8px 13px;
+  border: solid #A6A7A8 2px;
+  margin-top:27px;
+  text-align: center;
+  margin-left: 30px;
+}
+
+
+
+
+/* Reset Password - Send Email */
+body.background_lightgrey_whole {
+  background-color:#FAFAFA;
+  width: 100%;
+  height: 100%;
+}
+
+p.reset_password_tittle {
+  font-family: Arial;
+  font-size: 20px;
+  color: #6F6F70;
+  font-weight:bold;
+  text-align: center;
+}
+
+table.table_items_email {
+  background-color:white;
+  border:1px solid #E0E0E0;
+  margin-top:-530px;
+  margin-bottom:50px;
+  width:300px;
+  opacity:0.9;
+}
+
+td.reset_password_middle {
+  text-align: center;
+}
+
+button.reset_password_button {
+  font-family:Arial;
+  color:#A6A7A8;
+  font-size:12px;
+  background:transparent;
+  padding: 8px 13px 8px 13px;
+  border: solid #A6A7A8 2px;
+  margin-top:30px;
+  text-align: center;
+}
+
+input.input_reset_email {
+  border: solid #A6A7A8 1px;
+  width:145px;
+  height:35px;
+  text-align: center;
+}
+
+.reset_password_page_container_bottom {
+  background:white;
+  margin-top:-20%;
+}
+
+
+
+
+/* Password Successfully Changed Page */
+table.table_items_password_changed {
+  background-color:white;
+  border:1px solid #E0E0E0;
+  margin-top:-450px;
+  margin-bottom:50px;
+  width:430px;
+  height:100px;
+  opacity:0.9;
+}
+
+p.password_changed_tittle {
+  font-family: Arial;
+  font-size: 20px;
+  color: #6F6F70;
+  font-weight:bold;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.password_changed_page_container_bottom {
+  background:white;
+  margin-top:-12.2%;
+}
+
+
+
+
+/* Set Password */
+button.set_password_button {
+  font-family:Arial;
+  color:#A6A7A8;
+  font-size:12px;
+  background:transparent;
+  padding: 8px 9px 8px 9px;
+  border: solid #A6A7A8 2px;
+  margin-top:20px;
+  text-align: center;
+}
+
+input.input_set_password {
+  border: solid #A6A7A8 1px;
+  width:145px;
+  height:35px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+table.table_items_change_password {
+  background-color:white;
+  border:1px solid #E0E0E0;
+  margin-top:-568px;
+  margin-bottom:50px;
+  width:300px;
+  opacity:0.9;
+}
+
+.set_password_page_container_bottom {
+  background:white;
+  margin-top:-20.6%;
+}
+
+
+
+
+/* Follow Page */
+p.p_follow_title {
+  font-family:Arial;
+  color:#337AB7;
+  font-size:15px;
+  text-align:left;
+  margin-top:20px;
+  font-weight:bold;
+  margin-left: 40px;
+}
+
+
+
+
+/* Recent Visitors Page */
+p.p_visitors_date {
+  font-family:Arial;
+  font-size:small;
+}
+
+
+
+
+/* Group Stream */
+input.create_group {
+  width: 300px;
+  height: 36px;
+  margin-top: 18px;
+  border: solid #A6A7A8 2px;
+  text-align: center;
+}
+
+
+
+
+/* Group */
+button.group_join_quit_button {
+  font-family:Arial;
+  color:#B3E5FC;
+  font-size:15px;
+  text-align:center;
+  margin-top:34px;
+  font-weight:bold;
+  background: white;
+  border: none;
+}
+
+
+
+

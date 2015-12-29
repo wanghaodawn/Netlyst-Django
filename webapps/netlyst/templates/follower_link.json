@@ -1,0 +1,3 @@
+{
+	"source": "{{user.username}}","target":"{{follower.username}}"
+}

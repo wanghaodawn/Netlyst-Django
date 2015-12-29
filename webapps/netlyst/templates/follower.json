@@ -1,0 +1,26 @@
+{
+	"nodes": [
+		{"id": "{{user.username}}"}
+		{% if len != 0 %}
+		,
+		{% endif %}
+		{% for follower in followers %}
+			{%spaceless%}
+				{% include 'follower_node.json'%}
+			{%endspaceless%}
+			{% if not forloop.last %}
+				,
+			{% endif %}
+		{% endfor %}
+	],
+	"links": [
+		{% for follower in followers %}
+			{%spaceless%}
+				{% include 'follower_link.json'%}
+			{%endspaceless%}
+			{% if not forloop.last %}
+				,
+			{% endif %}
+		{% endfor %}
+	]
+}

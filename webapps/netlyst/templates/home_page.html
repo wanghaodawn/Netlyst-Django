@@ -1,0 +1,53 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+	<title> Netlyst </title>
+{% endblock %}
+
+{% block content %}
+				{% load static from staticfiles %}
+				<img src="{% static 'images/city.jpg' %}" class="img_login_background" alt="" />
+
+				<p class="login_page_middle_big_sentense">Login to know more about your social networks! 
+				</p>
+				<table><tr>
+				<td><a href="netlyst/global">
+					<button type="button" class="login_button">
+						LOG IN
+					</button></a>
+				</td>
+				<td>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				<td><a href="netlyst/signup">
+					<button type="button" class="signup_button">SIGN UP</button>
+				</a></td></tr>
+				<table/>
+
+				<div class="container_bottom">
+					<br />
+					<p class="p_center">
+						{% load static from staticfiles %}
+						<a href="#"><img src="{% static 'images/download-on-apple-store.png' %}" class="imgdownload" alt=""/></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						{% load static from staticfiles %}
+						<a href="#"><img src="{% static 'images/download-on-google-play.png' %}" class="imgdownload" alt=""/></a>
+					</p>
+					<br /><br />
+					<p class="bottom_small_blue">
+						<a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+						<a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="#">LANGUAGE</a>
+						<p class="bottom_small_black_right">© 2015 NETLYST</p>
+					</p>
+					<br />
+			</div>
+		
+{% endblock %}

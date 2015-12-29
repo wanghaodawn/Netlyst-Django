@@ -1,0 +1,1 @@
+{"max_entry":{{max_entry}},"posts":[{% for post in posts %}{%spaceless%}{% include 'post.json' %}{%endspaceless%}{% if not forloop.last %},{% endif %}{% endfor %}]}

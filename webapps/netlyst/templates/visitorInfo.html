@@ -1,0 +1,86 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+	<title> Recent Visitors - Netlyst </title>
+{% endblock %}
+
+{% block content %}
+
+
+			<table>
+        <tr>
+          <td class="navbar">
+            {% load static from staticfiles %}
+            <a href="{% url 'global' %}"><img src="{% static 'images/logo1_blue.png' %}" class="navbar_logo"></a>
+          </td>
+
+          <td class="navbar">
+            <form class="form-search">
+              <input type="text" class="round_corner_search" placeholder="Search"></input>
+            </form>
+          </td>
+
+          <td class="navbar">
+            <p class="navbar_username">
+            <form method = "post" action = "{% url 'django.contrib.auth.views.logout_then_login' %}">
+              <a href type = "submit">Log Out</a>
+              {% csrf_token %}
+            </form>
+            </p>
+          </td>
+
+        </tr>
+      </table>
+
+      
+
+      <div class="background_lightgrey">
+        <hr>
+        <br />
+
+        <table class="table_items">
+            <tr>
+              <td
+
+                  <table>
+                  	<tr>
+
+		                  {% for visitorinfo in visitorinfos %}
+									      <td>
+										      <img src="{% url 'photo' visitorinfo.visitor.id %}" class="img-circle" alt="{{form.first_name.value}} {{form.last_name.value}}" width="70px" height="70px">
+										      <br />
+
+										      <p class="p_visitors_date">
+										      	{{visitorinfo.date}}
+										      </p>
+										      <br />
+										    </td>
+									 		{% endfor %}
+							 	</tr>
+                  
+                  <br /><br /><br /><br />
+              </td>
+            </tr>
+          </table>
+        </table>
+
+        
+      
+
+  				<br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br /><br />
+  				<p class="bottom_small_blue">
+  					<a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+  					<a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  					<a href="#">LANGUAGE</a>
+  					<p class="bottom_small_black_right">© 2015 NETLYST</p>
+  				</p>
+  				<br />
+      </div>
+		
+{% endblock %}

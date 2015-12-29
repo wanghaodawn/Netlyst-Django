@@ -1,0 +1,184 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+<title> Group Stream - Netlyst </title>
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+.link {
+  stroke: #666;
+  stroke-opacity: .6;
+}
+
+</style>
+<body>
+{% load static from staticfiles %}
+<script src="{% static 'js/d3.min.js' %}"> </script>
+<script>
+
+var width = 1200,
+    height = 200;
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(-50)
+    .linkDistance(20)
+    .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("{% url 'get_group_info_all' %}", function(error, graph) {
+  if (error) throw error;
+
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 10)
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag);
+
+  node.append("title")
+      .text(function(d) { return d.name; });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  });
+});
+
+</script>
+
+
+<table>
+  <tr>
+    <td class="navbar">
+      {% load static from staticfiles %}
+      <a href="{% url 'global' %}"><img src="{% static 'images/logo1_blue.png' %}" class="navbar_logo"></a>
+    </td>
+
+    <td class="navbar">
+      <form method="post" action="{% url 'searchUser' %}" class="form-search">
+        <input type="text" class="round_corner_search" name="search" placeholder="Search"></input>
+        {% csrf_token %}
+      </form>
+    </td>
+
+    <td class="navbar">
+      <p class="navbar_username">
+        <a href="{% url 'groupstream' %}">GroupStream</a>
+      </p>
+    </td>
+  </tr>
+</table>
+
+
+<div class="background_lightgrey">
+  <hr>
+
+
+  <form action="{% url 'create_group' %}" method="post">
+
+    <table class="table_items_send_post">
+      <tr>
+        <td class="td_items">
+          <br />
+
+          <table>
+            <tr>
+
+              <td class="reset_password_middle">
+                <input type="text" class="create_group" rows="3" cols="60" name="new_group" placeholder="Create a New Group" maxlength="100">
+                </input>
+              </td>
+              <td>
+                <p class="p_center">
+                  <button type="submit" class="post_button">
+                    CREATE
+                  </button>
+                </p>
+              </td>
+            </tr>
+          </table>
+
+          <br /><br />
+        </td>
+      </tr>
+    </table>
+    {% csrf_token %}
+ </form>
+
+
+
+  <table class="table_items">
+    <tr>
+      <td class="td_items">
+        <br /><br />
+        <hr>
+
+        {% for group in all_groups %}
+          <a href="{% url 'get_group' group.id %}"> {{group}} </a>
+          <br /><br />
+          <p>{{group.description}}</p>
+          <br /><br />
+          {% if group.picture != NULL %}
+            <img src="{% url 'groupphoto' group.id %}" height="200",length="100">
+          {% endif %}
+          <br /><br />
+        {% endfor %}
+
+        <br /><br /><br /><br /><br /><br /><br /><br /><br />
+        <br /><br /><br /><br />
+        <hr>
+        <br /><br /><br /><br />
+      </td>
+    </tr>
+  </table>
+
+
+
+
+  <br /><br />
+  <p class="bottom_small_blue">
+    <a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+    <a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+    <a href="#">LANGUAGE</a>
+    <p class="bottom_small_black_right">© 2015 NETLYST</p>
+  </p>
+  <br />
+</div>
+
+{% endblock %}

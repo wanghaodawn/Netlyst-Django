@@ -1,0 +1,308 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+<title> Group - Netlyst </title>
+{% endblock %}
+
+{% block content %}
+
+<style>
+
+.node {
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+.link {
+  stroke: #666;
+  stroke-opacity: .6;
+}
+
+p.members {
+  color:#A6A7A8;
+  font-size:18px;
+  font-family:Arial;
+  margin-bottom: -7px;
+  text-align: center;
+}
+
+button.group_button1 {
+  font-family:Arial;
+  color:#A6A7A8;
+  font-size:12px;
+  background:transparent;
+  padding: 8px 13px 8px 13px;
+  border: solid #A6A7A8 2px;
+  margin-top: -10px;
+}
+
+button.group_button2 {
+  font-family:Arial;
+  color:#A6A7A8;
+  font-size:12px;
+  background:transparent;
+  padding: 8px 13px 8px 13px;
+  border: solid #A6A7A8 2px;
+}
+
+</style>
+<body>
+{% load static from staticfiles %}
+<script src="{% static 'js/d3.min.js' %}"> </script>
+<script>
+
+var width = 1200,
+    height = 200;
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(-120)
+    .linkDistance(30)
+    .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("{% url 'get_group_info' group.id %}", function(error, graph) {
+  if (error) throw error;
+
+  force
+      .nodes(graph.nodes)
+      .links(graph.links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(graph.links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", function(d) { return Math.sqrt(d.value); });
+
+  var node = svg.selectAll(".node")
+      .data(graph.nodes)
+    .enter().append("circle")
+      .attr("class", "node")
+      .attr("r", 10)
+      .style("fill", function(d) { return color(d.group); })
+      .call(force.drag);
+
+  node.append("title")
+      .text(function(d) { return d.name; });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("cx", function(d) { return d.x; })
+        .attr("cy", function(d) { return d.y; });
+  });
+});
+
+</script>
+
+
+
+<table>
+  <tr>
+    <td class="navbar">
+      <a href="{% url 'global' %}">
+        {% load static from staticfiles %}
+        <img src="{% static 'images/logo1_blue.png' %}" class="navbar_logo">
+      </a>
+    </td>
+
+    <td class="navbar">
+      <form method="post" action="{% url 'searchUser' %}" class="form-search">
+        <input type="text" class="round_corner_search" name="search" placeholder="Search"></input>
+        {% csrf_token %}
+      </form>
+    </td>
+
+
+    <td class="navbar">
+      <p class="navbar_username">
+        <a href="{% url 'groupstream' %}">GroupStream</a>
+      </p>
+    </td>
+
+  </tr>
+</table>
+
+
+
+
+<div class="background_lightgrey">
+  <hr>
+
+  <table>
+    <tr>
+      <td></td>
+      <td>
+
+  <div>
+    <img src="{% url 'groupphoto' group.id %}" width="600" height="300">
+  </div>
+
+
+
+  <div>
+    <h4 align="center">{{group}}</h4>
+    <br />
+    <br />
+
+      <table>
+        <tr>
+          <td></td>
+          <td>
+            {% if curr_user == group.creater %}
+              <a href="{% url 'edit_group' group.id %}">
+                <button type="submit" class="edit_profile_button">
+                  EDIT GROUP
+                </button>
+              </a>
+            {% endif %}
+          </td>
+          <td>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+          </td>
+          <td>
+            {% if is_joining == True %}
+            <form method="post" action="{% url 'quit' group.id %}">
+              <button type="submit" class="group_button1">QUIT GROUP</button>
+              {% csrf_token %}
+            </form>
+            {% else %}
+            <form method="post" action="{% url 'join' group.id %}">
+              <button type="submit" class="group_button2">JOIN GROUP</button>
+              {% csrf_token %}
+            </form>
+            {% endif %}
+          </td>
+          <td></td>
+        </tr>
+      </table>
+  </div>
+  </td>
+  <td></td>
+  </tr>
+</table>
+
+
+
+
+
+
+  <br /><br /><br /><br /><br /><br />
+  <table>
+    <tr>
+      <td></td>
+      <td>
+        <p class="members"> {{memlen}} MEMBERS </p> 
+        <br /><br /><br />
+        {% for member in members %}
+
+        {{member.owner.username}}
+        <img src = "{% url 'photo' member.owner.id %}" class="img-circle" alt="{{form.first_name.value}} {{form.last_name.value}}" width="50px" height="50px">
+        {% endfor %}
+      </td>
+      <td></td
+    </tr>
+  </table>
+
+ <br /><br /><br /><br />
+  <form method = "post" action ="{% url 'group_post' group.id %}">
+    <table class="table_items_send_post">
+      <tr>
+        <td class="td_items">
+          <br />
+
+          <table>
+            <tr>
+
+              <td class="reset_password_middle">
+                <textarea class="textarea_post" rows="3" cols="60" name="post" placeholder="" maxlength="200">
+                </textarea>
+              </td>
+              <td>
+                <p class="p_center">
+                  <button type="submit" class="post_button">
+                    POST
+                  </button>
+                </p>
+              </td>
+            </tr>
+          </table>
+
+
+          <br /><br />
+        </td>
+      </tr>
+    </table>
+    {% csrf_token %}
+  </form>
+
+
+  <div class="background_lightgrey">
+    <hr>
+
+    {% for post in posts %}
+    <table class="table_items">
+      <tr>
+        <td class="td_items">
+          <br /><br />
+          <hr>
+          <img src = "{% url 'photo' post.user.id %}" alt="{{form.first_name.value}} {{form.last_name.value}}" width = "50px">
+          <br />{{post.created}}</p>
+          {{post}}
+          <a href="{% url 'viewprofile' post.user.id %}" name = "user">{{post.user.username}}</a>
+          <br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br />
+          <hr>
+          <br /><br /><br /><br />
+        </td>
+      </tr>
+    </table>
+    {% endfor %}
+
+    <table class="table_items">
+      <tr>
+        <td class="td_items">
+          <br /><br />
+          <hr>
+          <br /><br /><br /><br /><br /><br /><br /><br /><br />
+          <br /><br /><br /><br />
+          <hr>
+          <br /><br /><br /><br />
+        </td>
+      </tr>
+    </table>
+
+
+
+
+
+
+    <br /><br />
+    <p class="bottom_small_blue">
+      <a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+      <a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+      <a href="#">LANGUAGE</a>
+      <p class="bottom_small_black_right">© 2015 NETLYST</p>
+    </p>
+    <br />
+  </div>
+
+  {% endblock %}

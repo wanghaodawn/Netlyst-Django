@@ -1,0 +1,14 @@
+{
+	"nodes": [
+		{% for member in members %}
+			{%spaceless%}
+				{% include 'node.json'%}
+			{%endspaceless%}
+			{% if not forloop.last %}
+				,
+			{% endif %}
+		{% endfor %}
+	],
+	"links": [
+	]
+}

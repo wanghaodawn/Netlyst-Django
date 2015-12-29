@@ -1,0 +1,1 @@
+{"id":{{post.id}},"html":"{{post.html|safe}}","comments":[{% for comment in post.comments %}{%spaceless%}{% include 'comment.json' %}{%endspaceless%}{% if not forloop.last %},{% endif %}{% endfor %}]}

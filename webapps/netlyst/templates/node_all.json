@@ -1,0 +1,4 @@
+{
+	"name": "{{member.owner.username}}",
+	"group": {{group.id}}
+}

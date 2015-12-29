@@ -1,0 +1,131 @@
+{% extends "home_page_base.html" %}
+
+{% block title %}
+  <title> Profile - Netlyst </title>
+{% endblock %}
+
+{% block content %}
+
+      <table>
+        <tr>
+          <td class="navbar">
+            {% load static from staticfiles %}
+            <a href="{% url 'global' %}"><img src="{% static 'images/logo1_blue.png' %}" class="navbar_logo"></a>
+          </td>
+
+          <td class="navbar">
+            <form class="form-search">
+              <input type="text" class="round_corner_search" placeholder="Search"></input>
+            </form>
+          </td>
+          
+          <td class="navbar">
+            <p class="navbar_username">
+              <a href="{% url 'django.contrib.auth.views.logout_then_login' %}" type = "submit">Log Out</a>
+            </p>
+          </td>
+        </tr>
+      </table>
+
+      
+
+      <div class="background_lightgrey">
+        <hr>
+        
+
+        
+
+
+
+        <table class="table_items">
+          <tr>
+            <td>
+              <p class="p_follow_title">
+                <a href="{% url 'follower_visual' current_user.id %}">{{f_er_num}} Followers</a>
+              </p>
+              <hr>
+
+              <table>
+                <tr>
+                  {% for follower in followers %} 
+                    <td>
+                    <img src = "{% url 'photo' follower.id %}" class="img-circle" alt="{{form.first_name.value}} {{form.last_name.value}}" width="50px" height="50px">
+                    <br />
+
+                    <p class="p_visitors_date">
+                      {{follower.username}}
+                    </p>
+
+                    <br />
+                    </td>
+                  {% endfor %}
+                </tr>
+              </table>
+
+              <br /><br />
+              <br /><br /><br /><br /><br /><br /><br /><br /><br />
+              <br /><br /><br /><br />
+              <br /><br /><br /><br />
+            </td>
+
+          </tr>
+        </table>
+
+
+        <table class="table_items">
+          <tr>
+            <td>
+              <p class="p_follow_title">
+                <a href="{% url 'followee_visual' current_user.id %}">{{f_ee_num}} Followings </a>
+              </p>
+              {% for followee in followees %} 
+                <img src = "{% url 'photo' followee.id %}" class="img-circle" alt="{{form.first_name.value}} {{form.last_name.value}}" width="50px" height="50px">
+                {{followee.username}}
+                {% endfor %}
+              <hr>
+              <br /><br />
+              <br /><br /><br /><br /><br /><br /><br /><br /><br />
+              <br /><br /><br /><br />
+              <br /><br /><br /><br />
+            </td>
+
+          </tr>
+        </table>
+      
+
+        
+      
+
+          <br /><br /><br /><br /><br /><br />
+          <p class="bottom_small_blue">
+            <a href="#">ABOUT US</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">SUPPORT</a>&nbsp;&nbsp;&nbsp;
+            <a href="#">BLOG</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">PRESS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">API</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">JOBS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">PRIVACY</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">TERMS</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#">LANGUAGE</a>
+            <p class="bottom_small_black_right">© 2015 NETLYST</p>
+          </p>
+          <br />
+      </div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

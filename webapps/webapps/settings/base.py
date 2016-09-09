@@ -130,9 +130,6 @@ DATABASES = {
 
 
 # **************  AWS S3 ************************
-AWS_STORAGE_BUCKET_NAME = 'netlyst'
-AWS_ACCESS_KEY_ID = 'AKIAIFFJIJBSOILARAEQ'
-AWS_SECRET_ACCESS_KEY = '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'
 # AWS_SECRET_ACCESS_KEY = os.environ['AWS_SECRET_ACCESS_KEY']
 
 # Tell django-storages that when coming up with the URL for an item in S3 storage, keep
@@ -166,7 +163,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'netlyst@gmail.com'
-EMAIL_HOST_PASSWORD = 'netlystnetlystnetlyst'
 EMAIL_PORT = 587
 
 
